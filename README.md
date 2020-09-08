@@ -1,5 +1,5 @@
 # Measuring Massive Multitask Language Understanding
-This is the repository for [Measuring Massive Multitask Language Understanding](https://arxiv.org/pdf/xxxx.yyyy) by
+This is the repository for [Measuring Massive Multitask Language Understanding](https://arxiv.org/pdf/2009.03300) by
 [Dan Hendrycks](https://people.eecs.berkeley.edu/~hendrycks/), [Collin Burns](http://collinpburns.com), Steven Basart, Andy Zou, Mantas Mazeika, [Dawn Song](https://people.eecs.berkeley.edu/~dawnsong/), and [Jacob Steinhardt](https://www.stat.berkeley.edu/~jsteinhardt/).
 
 This repository contains OpenAI API evaluation code, and the test is in `/data`.
@@ -26,7 +26,7 @@ If you find this useful in your research, please consider citing the test and al
     @article{hendryckstest2020,
       title={Measuring Massive Multitask Language Understanding},
       author={Dan Hendrycks and Collin Burns and Steven Basart and Andy Zou and Mantas Mazeika and Dawn Song and Jacob Steinhardt},
-      journal={arXiv preprint arXiv:xxxx.yyyy},
+      journal={arXiv preprint arXiv:2009.03300},
       year={2020}
     }
 
