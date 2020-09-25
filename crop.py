@@ -1,8 +1,26 @@
-"""Byte pair encoding utilities (from the official GPT-2 GitHub repository)"""
-import os
+"""Byte pair encoding utilities (Adapted from the official GPT-2 GitHub repository)"""
 import json
+import os
 import regex as re
+import requests
+import sys
+
 from functools import lru_cache
+from tqdm import tqdm
+
+
+def _get_encoder(subdir):
+    print(subdir)
+    for filename in ['encoder.json','hparams.json', 'vocab.bpe']:
+        r = requests.get("https://storage.googleapis.com/gpt-2/" + subdir + "/" + filename, stream=True)
+        with open(os.path.join(subdir, filename), 'wb') as f:
+            file_size = int(r.headers["content-length"])
+            chunk_size = 1000
+            with tqdm(ncols=100, desc="Fetching " + filename, total=file_size, unit_scale=True) as pbar:
+                # 1k for chunk_size, since Ethernet packet size is around 1500 bytes
+                for chunk in r.iter_content(chunk_size=chunk_size):
+                    f.write(chunk)
+                    pbar.update(chunk_size)
 
 @lru_cache()
 def bytes_to_unicode():
@@ -104,10 +122,18 @@ class Encoder:
         text = bytearray([self.byte_decoder[c] for c in text]).decode('utf-8', errors=self.errors)
         return text
 
-def get_encoder(model_name, models_dir):
-    with open(os.path.join(models_dir, model_name, 'encoder.json'), 'r') as f:
+def get_encoder(model_name):
+    subdir = os.path.join("models", model_name)
+    if not os.path.exists(subdir):
+        os.makedirs(subdir)
+    if not os.path.exists(os.path.join(subdir, 'encoder.json')):
+        _get_encoder(subdir)
+
+    subdir = subdir.replace('\\','/') # needed for Windows
+
+    with open(os.path.join(subdir, 'encoder.json'), 'r') as f:
         encoder = json.load(f)
-    with open(os.path.join(models_dir, model_name, 'vocab.bpe'), 'r', encoding="utf-8") as f:
+    with open(os.path.join(subdir, 'vocab.bpe'), 'r', encoding="utf-8") as f:
         bpe_data = f.read()
     bpe_merges = [tuple(merge_str.split()) for merge_str in bpe_data.split('\n')[1:-1]]
     return Encoder(
@@ -115,11 +141,7 @@ def get_encoder(model_name, models_dir):
         bpe_merges=bpe_merges,
     )
 
-# To get the full path of a directory
-# https://stackoverflow.com/questions/5137497/find-current-directory-and-files-directory
-dir_path = os.path.dirname(os.path.realpath(__file__))
-model_dir = os.path.join(dir_path, 'models')
-enc = get_encoder('124M', model_dir)
+enc = get_encoder('124M')
 
 def crop_prompt(prompt: str):
     global enc
