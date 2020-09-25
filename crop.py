@@ -10,8 +10,8 @@ from tqdm import tqdm
 
 
 def _get_encoder(subdir):
-    print(subdir)
-    for filename in ['encoder.json','hparams.json', 'vocab.bpe']:
+    print("Downloading encoder and vocab to ", subdir)
+    for filename in ['encoder.json', 'vocab.bpe']:
         r = requests.get("https://storage.googleapis.com/gpt-2/" + subdir + "/" + filename, stream=True)
         with open(os.path.join(subdir, filename), 'wb') as f:
             file_size = int(r.headers["content-length"])
