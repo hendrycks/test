@@ -1,14 +1,14 @@
+import argparse
+import openai
 import os
 import numpy as np
 import pandas as pd
-from crop import crop
-import openai
 import time
-import argparse
+
+from crop import crop
 
 openai.api_key = "INSERTYOURKEYHERE"
 choices = ["A", "B", "C", "D"]
-engines = ["davinci", "curie", "babbage", "ada"]
 
 
 def softmax(x):
@@ -101,10 +101,8 @@ def eval(args, subject, engine, dev_df, test_df):
     return cors, acc, all_probs
 
 def main(args):
-    engines = ["davinci", "curie", "babbage", "ada"]
+    engines = args.engine
     subjects = sorted([f.split("_test.csv")[0] for f in os.listdir(os.path.join(args.data_dir, "test")) if "_test.csv" in f])[:3]
-    if args.engine:
-        engines = [args.engine]
 
     if not os.path.exists(args.save_dir):
         os.mkdir(args.save_dir)
@@ -140,7 +138,8 @@ if __name__ == "__main__":
     parser.add_argument("--ntrain", "-k", type=int, default=5)
     parser.add_argument("--data_dir", "-d", type=str, default="data")
     parser.add_argument("--save_dir", "-s", type=str, default="results")
-    parser.add_argument("--engine", "-e", type=str, default="")
+    parser.add_argument("--engine", "-e", choices=["davinci", "curie", "babbage", "ada"],
+                        default=["davinci", "curie", "babbage", "ada"], nargs="+")
     args = parser.parse_args()
     main(args)
 
