@@ -4,8 +4,6 @@ This is the repository for [Measuring Massive Multitask Language Understanding](
 
 This repository contains OpenAI API evaluation code, and the test is available for download [here](https://people.eecs.berkeley.edu/~hendrycks/data.tar).
 
-<img align="center" src="scale_and_accuracy.png" width="500">
-
 ## Test Leaderboard
 
 If you want to have your model added to the leaderboard, please reach out to us or submit a pull request.
@@ -15,7 +13,7 @@ Results of the test:
 |                Model               | Authors |  Humanities |  Social Science  | STEM | Other | Average |
 |------------------------------------|----------|:-------:|:-------:|:-------:|:-------:|:-------:|
 | [GPT-3](https://arxiv.org/abs/2005.14165) | Brown et al., 2020 | 40.8 | 50.4 | 36.7 | 48.8 | 43.9
-| [UnifiedQA](https://arxiv.org/abs/2005.00700) | Khashabi et al., 2020 | 38.0 | 41.5 | 32.2 | 42.1 | 38.5
+| [UnifiedQA](https://arxiv.org/abs/2005.00700) | Khashabi et al., 2020 | 45.6 | 56.6 | 40.2 | 54.6 | 48.9
 | Random Baseline           | N/A | 25.0 | 25.0 | 25.0 | 25.0 | 25.0 | 25.0
 
 
