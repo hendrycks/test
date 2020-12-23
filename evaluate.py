@@ -102,7 +102,7 @@ def eval(args, subject, engine, dev_df, test_df):
 
 def main(args):
     engines = args.engine
-    subjects = sorted([f.split("_test.csv")[0] for f in os.listdir(os.path.join(args.data_dir, "test")) if "_test.csv" in f])[:3]
+    subjects = sorted([f.split("_test.csv")[0] for f in os.listdir(os.path.join(args.data_dir, "test")) if "_test.csv" in f])
 
     if not os.path.exists(args.save_dir):
         os.mkdir(args.save_dir)
