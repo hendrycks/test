@@ -22,16 +22,16 @@ Results of the test:
 
 If you find this useful in your research, please consider citing the test and also the [ETHICS](https://arxiv.org/abs/2008.02275) dataset it draws from:
 
-    @article{hendryckstest2020,
+    @article{hendryckstest2021,
       title={Measuring Massive Multitask Language Understanding},
       author={Dan Hendrycks and Collin Burns and Steven Basart and Andy Zou and Mantas Mazeika and Dawn Song and Jacob Steinhardt},
-      journal={arXiv preprint arXiv:2009.03300},
-      year={2020}
+      journal={Proceedings of the International Conference on Learning Representations (ICLR)},
+      year={2021}
     }
 
-    @article{hendrycksethics2020,
+    @article{hendrycks2021ethics,
       title={Aligning AI With Shared Human Values},
       author={Dan Hendrycks and Collin Burns and Steven Basart and Andrew Critch and Jerry Li and Dawn Song and Jacob Steinhardt},
-      journal={arXiv preprint arXiv:2008.02275},
-      year={2020}
+      journal={Proceedings of the International Conference on Learning Representations (ICLR)},
+      year={2021}
     }
