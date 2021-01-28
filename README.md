@@ -2,7 +2,7 @@
 This is the repository for [Measuring Massive Multitask Language Understanding](https://arxiv.org/pdf/2009.03300) by
 [Dan Hendrycks](https://people.eecs.berkeley.edu/~hendrycks/), [Collin Burns](http://collinpburns.com), [Steven Basart](https://stevenbas.art), Andy Zou, Mantas Mazeika, [Dawn Song](https://people.eecs.berkeley.edu/~dawnsong/), and [Jacob Steinhardt](https://www.stat.berkeley.edu/~jsteinhardt/) (ICLR 2021).
 
-This repository contains OpenAI API evaluation code, and the test is available for download [here](https://people.eecs.berkeley.edu/~hendrycks/data.tar).
+This repository contains OpenAI API evaluation code, and the test is available for download [**here**](https://people.eecs.berkeley.edu/~hendrycks/data.tar).
 
 ## Test Leaderboard
 
