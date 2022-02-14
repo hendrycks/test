@@ -20,6 +20,7 @@ Results of the test:
 | [GPT-2](https://arxiv.org/abs/2005.14165) | Radford et al., 2019 | 32.8 | 33.3 | 30.2 | 33.1 | 32.4
 | Random Baseline           | N/A | 25.0 | 25.0 | 25.0 | 25.0 | 25.0 | 25.0
 
+A mirror of this leaderboard is also available at [Papers with Code](https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu).
 
 ## Citation
 
