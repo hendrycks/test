@@ -40,6 +40,7 @@ def gen_prompt(train_df, subject, k=-1):
     return prompt
 
 
+@torch.no_grad()
 def eval(args, subject, model, tokenizer, dev_df, test_df):
     cors = []
     all_probs = []
@@ -114,6 +115,7 @@ def main(args):
         for gpu in range(args.ngpu)
     }
     model.parallelize(device_map)
+    model.eval()
     subjects = sorted(
         [
             f.split("_test.csv")[0]
