@@ -3,6 +3,7 @@ import os
 import torch
 import numpy as np
 import pandas as pd
+from categories import subcategories, categories
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 import time
 
@@ -58,7 +59,6 @@ def eval(args, subject, model, tokenizer, dev_df, test_df):
             train_prompt = gen_prompt(dev_df, subject, k)
             prompt = train_prompt + prompt_end
             input_ids = tokenizer(prompt, return_tensors="pt").input_ids.cuda()
-            print(input_ids.shape[-1])
 
         label = test_df.iloc[i, test_df.shape[1] - 1]
 
@@ -128,6 +128,10 @@ def main(args):
         os.makedirs(os.path.join(args.save_dir, "results_{}".format(args.model)))
 
     all_cors = []
+    subcat_cors = {
+        subcat: [] for subcat_lists in subcategories.values() for subcat in subcat_lists
+    }
+    cat_cors = {cat: [] for cat in categories}
 
     for subject in subjects:
         dev_df = pd.read_csv(
@@ -138,6 +142,12 @@ def main(args):
         )
 
         cors, acc, probs = eval(args, subject, model, tokenizer, dev_df, test_df)
+        subcats = subcategories[subject]
+        for subcat in subcats:
+            subcat_cors[subcat].append(cors)
+            for key in categories.keys():
+                if subcat in categories[key]:
+                    cat_cors[key].append(cors)
         all_cors.append(cors)
 
         test_df["{}_correct".format(args.model)] = cors
@@ -151,6 +161,13 @@ def main(args):
             index=None,
         )
 
+    for subcat in subcat_cors:
+        subcat_acc = np.mean(np.concatenate(subcat_cors[subcat]))
+        print("Average accuracy {:.3f} - {}".format(subcat_acc, subcat))
+
+    for cat in cat_cors:
+        cat_acc = np.mean(np.concatenate(cat_cors[cat]))
+        print("Average accuracy {:.3f} - {}".format(cat_acc, cat))
     weighted_acc = np.mean(np.concatenate(all_cors))
     print("Average accuracy: {:.3f}".format(weighted_acc))
 
