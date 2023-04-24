@@ -12,7 +12,7 @@ from tqdm import tqdm
 def _get_encoder(subdir):
     print("Downloading encoder and vocab to ", subdir)
     for filename in ['encoder.json', 'vocab.bpe']:
-        r = requests.get("https://openaipublic.blob.core.windows.net/gpt-2/ " + subdir + "/" + filename, stream=True)
+        r = requests.get("https://openaipublic.blob.core.windows.net/gpt-2/" + subdir + "/" + filename, stream=True)
         with open(os.path.join(subdir, filename), 'wb') as f:
             file_size = int(r.headers["content-length"])
             chunk_size = 1000
