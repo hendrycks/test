@@ -25,6 +25,7 @@ Results of the test:
 | [flan-T5-small](https://arxiv.org/abs/2210.11416) | Chung et al., 2022 | 29.9 | 30.9 | 27.5 | 29.7 | 29.5
 | Random Baseline           | N/A | 25.0 | 25.0 | 25.0 | 25.0 | 25.0 | 25.0
 
+A mirror of this leaderboard is also available at [Papers with Code](https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu).
 
 ## Citation
 
