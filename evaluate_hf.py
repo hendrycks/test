@@ -153,15 +153,23 @@ def main(args):
             index=None,
         )
 
+    results = {"subcategories": {}, "categories": {}}
     for subcat in subcat_cors:
         subcat_acc = np.mean(np.concatenate(subcat_cors[subcat]))
+        results["subcategories"][subcat] = subcat_acc
         print("Average accuracy {:.3f} - {}".format(subcat_acc, subcat))
 
     for cat in cat_cors:
         cat_acc = np.mean(np.concatenate(cat_cors[cat]))
+        results["categories"][cat] = cat_acc
         print("Average accuracy {:.3f} - {}".format(cat_acc, cat))
     weighted_acc = np.mean(np.concatenate(all_cors))
+    results["weighted_accuracy"] = weighted_acc
     print("Average accuracy: {:.3f}".format(weighted_acc))
+
+    results_file = os.path.join(args.save_dir, "accuracies_{}.json".format(args.model.replace("/", "_")))
+    with open(results_file, "w") as f:
+        json.dump(results, f)
 
 
 if __name__ == "__main__":
@@ -169,11 +177,6 @@ if __name__ == "__main__":
     parser.add_argument("--ntrain", "-k", type=int, default=5)
     parser.add_argument("--data_dir", "-d", type=str, default="data")
     parser.add_argument("--save_dir", "-s", type=str, default="results")
-    parser.add_argument(
-        "--model",
-        "-m",
-        type=str,
-        default="google/flan-t5-small",
-    )
+    parser.add_argument("--model", "-m", type=str)
     args = parser.parse_args()
     main(args)
