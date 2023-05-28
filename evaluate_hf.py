@@ -74,7 +74,7 @@ def eval(args, subject, model, tokenizer, dev_df, test_df):
                         logits[tokenizer("C").input_ids[-1]],
                         logits[tokenizer("D").input_ids[-1]],
                     ]
-                ),
+                ).float(),
                 dim=0,
             )
             .detach()
