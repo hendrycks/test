@@ -1,11 +1,14 @@
 import argparse
+import json
 import os
-import torch
+import time
+
 import numpy as np
 import pandas as pd
-from categories import subcategories, categories
+import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
-import time
+
+from categories import categories, subcategories
 
 choices = ["A", "B", "C", "D"]
 
@@ -59,7 +62,9 @@ def eval(args, subject, model, tokenizer, dev_df, test_df):
             k -= 1
             train_prompt = gen_prompt(dev_df, subject, k)
             prompt = train_prompt + prompt_end
-            input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to(model.device)
+            input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to(
+                model.device
+            )
 
         label = test_df.iloc[i, test_df.shape[1] - 1]
 
@@ -167,7 +172,9 @@ def main(args):
     results["weighted_accuracy"] = weighted_acc
     print("Average accuracy: {:.3f}".format(weighted_acc))
 
-    results_file = os.path.join(args.save_dir, "accuracies_{}.json".format(args.model.replace("/", "_")))
+    results_file = os.path.join(
+        args.save_dir, "accuracies_{}.json".format(args.model.replace("/", "_"))
+    )
     with open(results_file, "w") as f:
         json.dump(results, f)
 
