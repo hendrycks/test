@@ -99,7 +99,7 @@ def eval(args, subject, model, tokenizer, dev_df, test_df):
 def main(args):
     model = AutoModelForCausalLM.from_pretrained(
         args.model,
-        torch_dtype=torch.float32,
+        torch_dtype=torch.float16,
         load_in_8bit=False,
         low_cpu_mem_usage=True,
         device_map="auto",
